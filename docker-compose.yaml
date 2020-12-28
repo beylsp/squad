@@ -16,6 +16,7 @@ volumes:
 services:
   rabbitmq:
     image: rabbitmq
+    restart: always
 
   dbmigrate:
     <<: *common_config
@@ -23,21 +24,26 @@ services:
     deploy:
       restart_policy:
         condition: none
+    restart: always
 
   web:
     <<: *common_config
-    command: squad --fast --bind 0.0.0.0:8000
+    command: squad --fast --bind 0.0.0.0:8080
     ports:
-      - '8000:8000'
+      - '8080:8080'
+    restart: always
 
   worker:
     <<: *common_config
     command: squad-worker
+    restart: always
 
   listener:
     <<: *common_config
     command: squad-listener
+    restart: always
 
   scheduler:
     <<: *common_config
     command: squad-scheduler
+    restart: always
