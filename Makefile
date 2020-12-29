@@ -3,4 +3,7 @@ all: squad
 squad:
 	docker-compose up -d
 
-.PHONY: all squad
+clean:
+	docker-compose down
+
+.PHONY: all squad clean
